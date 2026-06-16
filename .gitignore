@@ -3,3 +3,5 @@ __pycache__/
 *.pyo
 *.pdf
 given_tests.py
+hw6.py
+.DS_Store

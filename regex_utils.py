@@ -42,14 +42,10 @@ def extract_author_book(searchstring):
         r"\b([A-Z][A-Za-z]*(?:\s+[A-Z][A-Za-z]*)?)\s+wrote\s+"
         r"(books|[A-Z0-9][A-Za-z0-9]*(?:\s+[A-Z0-9][A-Za-z0-9]*){0,2})\b"
     )
-
     match = pattern.search(searchstring)
     if not match:
         return ("noauthor", "noname")
-
-    author = match.group(1).strip()
-    book = match.group(2).strip()
-    return (author, book)
+    return (match.group(1).strip(), match.group(2).strip())
 
 
 def age_up_text(searchstring):
@@ -66,12 +62,7 @@ def age_up_text(searchstring):
         The string with replacements applied, or "nomatch" if no match was found
     """
     pattern = re.compile(r"\b([A-Z][A-Za-z0-9]*)\b(\s+)(Boy|Girl|boy|girl)\b")
-    replacements = {
-        "Boy": "Man",
-        "Girl": "Woman",
-        "boy": "man",
-        "girl": "woman",
-    }
+    replacements = {"Boy": "Man", "Girl": "Woman", "boy": "man", "girl": "woman"}
 
     def repl(match):
         return f"{match.group(1)}{match.group(2)}{replacements[match.group(3)]}"
@@ -81,12 +72,12 @@ def age_up_text(searchstring):
 
 
 if __name__ == '__main__':
-    print(validate_email("john.123@vought.com"))        # valid
-    print(validate_email("john.123@gmail.com"))          # invalid
+    print(validate_email("john.123@vought.com"))         # valid
+    print(validate_email("john.123@gmail.com"))           # invalid
 
-    print(extract_author_book("Stephen King wrote It"))  # ('Stephen King', 'It')
-    print(extract_author_book("no author here"))         # ('noauthor', 'noname')
+    print(extract_author_book("Stephen King wrote It"))   # ('Stephen King', 'It')
+    print(extract_author_book("no author here"))          # ('noauthor', 'noname')
 
-    print(age_up_text("Spider boy"))     # Spider man
+    print(age_up_text("Spider boy"))    # Spider man
     print(age_up_text("Wonder girl"))   # Wonder woman
     print(age_up_text("no match here")) # nomatch

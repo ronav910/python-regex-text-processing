@@ -2,7 +2,7 @@
 
 Three regex utilities built with Python's `re` module covering validation, extraction, and substitution.
 
-## Functions (`hw6.py`)
+## Functions (`regex_utils.py`)
 
 ### `validate_email(searchstring)`
 Validates a structured email format: `<name>.<employee_id><suffix>@<domain>`.
